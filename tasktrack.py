@@ -4,6 +4,21 @@
 Author: Amrita Penke
 Course: CPS 310
 """
+TASKS_FILE = "tasks.txt"
+def load_tasks(filename):
+    """Load tasks from a text file."""
+    tasks = []
+
+    try:
+        with open(filename, "r") as file:
+            for line in file:
+                task = line.strip()
+                if task:
+                    tasks.append(task)
+    except FileNotFoundError:
+        return []
+
+    return tasks
 
 def display_menu():
     """Display the available TaskTrack menu options."""
@@ -20,14 +35,18 @@ def add_task(tasks):
 
 
 def view_tasks(tasks):
-    """Display all tasks currently stored in the task list."""
-    # TODO: Complete this function in Step 9.
-    pass
+    """Display all tasks currently stored."""
+    if not tasks:
+        print("No tasks available.")
+    else:
+        print("\nTasks:")
+        for number, task in enumerate(tasks, start=1):
+            print(f"{number}. {task}")
 
 
 def main():
     """Run the TaskTrack menu until the user chooses to exit."""
-    tasks = []
+    tasks = load_tasks(TASKS_FILE)
 
     while True:
         display_menu()
