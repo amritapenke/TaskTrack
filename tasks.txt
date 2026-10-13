@@ -1,3 +1,2 @@
-Complete CPS 310 ICA 5
 Review GitHub pull request
 Test TaskTrack features

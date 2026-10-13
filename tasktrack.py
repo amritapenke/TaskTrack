@@ -62,6 +62,14 @@ def view_tasks(tasks):
             print(f"{number}. {task}")
 
 
+def remove_task_by_number(tasks, task_number):
+    """Remove and return a task by its displayed number, or return None."""
+    if task_number < 1 or task_number > len(tasks):
+        return None
+
+    return tasks.pop(task_number - 1)
+
+
 def remove_task(tasks):
     """Remove a task by its number. Return True if successful."""
     if not tasks:
@@ -76,12 +84,12 @@ def remove_task(tasks):
         return False
 
     task_number = int(selection)
+    removed_task = remove_task_by_number(tasks, task_number)
 
-    if task_number < 1 or task_number > len(tasks):
+    if removed_task is None:
         print("That task number does not exist.")
         return False
 
-    removed_task = tasks.pop(task_number - 1)
     print(f"Removed task: {removed_task}")
     return True
 
