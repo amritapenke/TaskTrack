@@ -20,12 +20,20 @@ def load_tasks(filename):
 
     return tasks
 
+def save_tasks(tasks, filename):
+    """Save the current task list to a text file."""
+    with open(filename, "w") as file:
+        for task in tasks:
+            file.write(task + "\n")
+        
+
 def display_menu():
     """Display the available TaskTrack menu options."""
     print("\nTaskTrack")
     print("1. View tasks")
     print("2. Add task")
-    print("3. Exit")
+    print("3. Remove task")
+    print("4. Exit")
 
 
 def add_task(tasks):
@@ -54,6 +62,30 @@ def view_tasks(tasks):
             print(f"{number}. {task}")
 
 
+def remove_task(tasks):
+    """Remove a task by its number. Return True if successful."""
+    if not tasks:
+        print("No tasks are available to remove.")
+        return False
+
+    view_tasks(tasks)
+    selection = input("Enter the number of the task to remove: ").strip()
+
+    if not selection.isdigit():
+        print("Please enter a valid task number.")
+        return False
+
+    task_number = int(selection)
+
+    if task_number < 1 or task_number > len(tasks):
+        print("That task number does not exist.")
+        return False
+
+    removed_task = tasks.pop(task_number - 1)
+    print(f"Removed task: {removed_task}")
+    return True
+
+
 def main():
     """Run the TaskTrack menu until the user chooses to exit."""
     tasks = load_tasks(TASKS_FILE)
@@ -67,10 +99,13 @@ def main():
         elif choice == "2":
             add_task(tasks)
         elif choice == "3":
+            if remove_task(tasks):
+                save_tasks(tasks, TASKS_FILE)
+        elif choice == "4":
             print("Goodbye!")
             break
         else:
-            print("Please enter 1, 2, or 3.")
+            print("Please enter 1, 2, 3, or 4.")
 
 
 if __name__ == "__main__":

@@ -38,3 +38,12 @@ Git and GitHub were used to track development through multiple meaningful commit
 
 Amrita Penke  
 CPS 310
+## Remove Task Feature
+
+Users can select option 3 to remove a task by its number.
+
+The program checks for invalid inputs, including letters,
+zero, and numbers outside the task list.
+
+After a successful removal, the updated tasks are saved
+to tasks.txt so deleted tasks do not return.
